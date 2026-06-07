@@ -1,19 +1,22 @@
-Descripción: Se incorpora la lógica de umbral. Se configuran los pines del LED RGB y se define el límite de temperatura (31°C). Si se supera, enciende rojo; si no, verde.
-// --- 1. Definición de pines ---
-const int pinTemp  = A0;
-const int ledRojo  = 6;
-const int ledAzul = 5;
-const int ledVerde  = 4;
+Descripción: Se añade el segundo actuador exigido por la tarea. El buzzer se acopla a la lógica del umbral de temperatura para sonar simultáneamente con el LED rojo.
 
-// --- 2. Variables del sistema ---
+// --- 1. Definición de pines ---
+const int pinTemp   = A0;
+const int pinBuzzer = 8;
+const int ledRojo   = 6;
+const int ledAzul  = 5;
+const int ledVerde   = 4;
+
 float limiteTemperatura = 31.0;
 
 void setup() {
   Serial.begin(9600);
+  pinMode(pinBuzzer, OUTPUT);
   pinMode(ledRojo, OUTPUT);
   pinMode(ledVerde, OUTPUT);
   pinMode(ledAzul, OUTPUT);
-  setColor(LOW, LOW, LOW); // Apagar LED inicial (Cátodo Común)
+  noTone(pinBuzzer);
+  setColor(LOW, LOW, LOW);
 }
 
 void loop() {
@@ -21,17 +24,17 @@ void loop() {
   float voltaje = lectura * (5.0 / 1023.0);
   float temperaturaC = (voltaje - 0.5) * 100.0;
 
-  // Lógica del umbral visual
   if (temperaturaC >= limiteTemperatura) {
-    setColor(HIGH, LOW, LOW); // Rojo encendido
+    setColor(HIGH, LOW, LOW);
+    tone(pinBuzzer, 1000);    // Activar sonido
   } else {
-    setColor(LOW, HIGH, LOW); // Verde encendido
+    setColor(LOW, HIGH, LOW);
+    noTone(pinBuzzer);        // Silenciar sonido
   }
 
   delay(500);
 }
 
-// Función para controlar el LED RGB (Cátodo Común)
 void setColor(int rojo, int verde, int azul) {
   digitalWrite(ledRojo, rojo);
   digitalWrite(ledVerde, verde);
