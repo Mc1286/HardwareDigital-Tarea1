@@ -1,16 +1,16 @@
 HardwareDigital-Tarea1
 "Primer proyecto práctico para la asignatura ISF-215 Hardware Digital (UV). Sistema embebido basado en Arduino UNO que integra sensores analógicos y digitales con control de actuadores."
 
-Sistema de Monitoreo Térmico Agroindustrial con Protocolo de Acuse de Recibo
+Sistema de Monitoreo Ambiental para Servidores con Protocolo de Acuse de Recibo
 
 Este repositorio contiene el código fuente y la documentación para la Tarea 1 de la asignatura ISF-215 Hardware Digital de la Universidad de Valparaíso.
 
 Descripción del Proyecto y Caso de Uso
-El sistema es un prototipo embebido basado en Arduino UNO diseñado para el monitoreo de la cadena de frío y ambientes de temperatura controlada (ej. cámaras frigoríficas en plantas de procesamiento agrícola). Utiliza un sensor analógico (TMP36) para realizar mediciones constantes del entorno.
+El sistema es un prototipo embebido basado en Arduino UNO diseñado para el monitoreo térmico continuo en cuartos de servidores (Data Centers) y racks de telecomunicaciones. Utiliza un sensor analógico (TMP36) para realizar mediciones constantes del entorno ambiental y proteger el hardware frente a fallas en los sistemas de climatización (HVAC).
 
-Si la temperatura supera el umbral crítico de riesgo (31°C), el sistema activa un protocolo de alerta de dos vías: un buzzer emite un tono de advertencia audible sobre el ruido de la maquinaria, y un LED RGB parpadea en color rojo como baliza visual.
+Si la temperatura del aire supera el umbral crítico de riesgo de 31°C, el sistema determina que la refrigeración ha fallado y activa un protocolo de alerta de dos vías: un buzzer emite un tono de advertencia audible por sobre el ruido constante de los ventiladores de los racks, y un LED RGB parpadea en color rojo como baliza visual de emergencia.
 
-Para evitar la fatiga auditiva de los operarios sin comprometer la seguridad industrial, el sistema incluye una función de "reconocimiento de alarma" (Acknowledge). Mediante un pulsador digital (implementado con debouncing por software), el operario puede confirmar que está al tanto de la falla silenciando el buzzer temporalmente. Sin embargo, el LED rojo se mantiene encendido de forma fija como indicador innegociable de que el peligro térmico continúa. Una vez que el problema se resuelve y la temperatura vuelve a niveles operativos normales, el sistema se rearma automáticamente (LED verde).
+Para evitar la fatiga auditiva de los administradores de TI sin comprometer la integridad de los equipos, el sistema incluye una función de "reconocimiento de alarma" (Acknowledge). Mediante un pulsador digital (implementado con debouncing por software), el administrador puede confirmar que está al tanto de la falla silenciando el buzzer temporalmente mientras gestiona el apagado seguro de los servidores o revisa el aire acondicionado. Sin embargo, el LED rojo se mantiene encendido de forma fija como indicador innegociable de que el peligro de sobrecalentamiento continúa. Una vez que el problema se resuelve y la temperatura ambiente vuelve a niveles operativos normales, el sistema se rearma automáticamente (LED verde).
 
 Esquema de Conexiones
 El circuito está montado sobre una placa de pruebas (protoboard) conectada al Arduino UNO con la siguiente distribución de pines:
@@ -25,7 +25,7 @@ Salidas:
 
 Buzzer: Conectado al pin digital 8.
 
-LED RGB (Cátodo Común): Canal Rojo al pin digital 6, Canal Verde al pin digital 5, y Canal Azul al pin digital 4.
+LED RGB (Cátodo Común): Canal Rojo al pin digital 6, Canal Verde al pin digital 4, y Canal Azul al pin digital 5.
 
 (Nota: Puedes visualizar el diagrama físico en el archivo esquema.png adjunto en este repositorio).
 
