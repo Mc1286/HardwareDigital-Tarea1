@@ -1,4 +1,4 @@
-Descripción: El equipo comenzó configurando el hardware básico. En esta fase solo se lee el valor del conversor analógico a digital (ADC) del sensor TMP36 y se imprime en el monitor serie para comprobar que hay conexión.
+Descripción: Se aplica la fórmula matemática documentada para transformar la lectura del ADC a voltaje y, finalmente, a la magnitud física requerida (grados Celsius).
 
 // --- 1. Definición de pines ---
 const int pinTemp = A0;
@@ -8,11 +8,15 @@ void setup() {
 }
 
 void loop() {
-  // Lectura cruda del sensor (valor entre 0 y 1023)
   int lectura = analogRead(pinTemp);
-  
-  Serial.print("Lectura ADC: ");
-  Serial.println(lectura);
-  
-  delay(500); // Pausa básica para no saturar la consola
+
+  // Conversión de ADC a Magnitud Física
+  float voltaje = lectura * (5.0 / 1023.0);
+  float temperaturaC = (voltaje - 0.5) * 100.0;
+
+  Serial.print("Temperatura: ");
+  Serial.print(temperaturaC, 1);
+  Serial.println(" C");
+
+  delay(500);
 }
