@@ -1,4 +1,4 @@
-Descripción: Se añade el segundo actuador exigido por la tarea. El buzzer se acopla a la lógica del umbral de temperatura para sonar simultáneamente con el LED rojo.
+//Descripción: Se añade el segundo actuador exigido por la tarea. El buzzer se acopla a la lógica del umbral de temperatura para sonar simultáneamente con el LED rojo.
 
 // --- 1. Definición de pines ---
 const int pinTemp   = A0;
