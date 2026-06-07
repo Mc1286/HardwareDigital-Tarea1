@@ -1,3 +1,4 @@
+Descripción: Se incorpora la lógica de umbral. Se configuran los pines del LED RGB y se define el límite de temperatura (31°C). Si se supera, enciende rojo; si no, verde.
 // --- 1. Definición de pines ---
 const int pinTemp  = A0;
 const int ledRojo  = 6;
